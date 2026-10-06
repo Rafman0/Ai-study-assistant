@@ -182,12 +182,12 @@ function get_db_connection() {
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
 
-        // Enable SSL when a CA certificate is provided
-        $caBundle = getenv('CA_BUNDLE_PATH');
+        // Enable SSL for Aiven MySQL
+        $caBundle = getenv('CA_BUNDLE_PATH') ?: '/etc/ssl/certs/ca-certificates.crt';
 
-        if ($caBundle && file_exists($caBundle)) {
+        if (file_exists($caBundle)) {
             $options[PDO::MYSQL_ATTR_SSL_CA] = $caBundle;
-            $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = true;
+             $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = true;
         }
 
         return new PDO($dsn, DB_USER, DB_PASS, $options);

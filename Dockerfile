@@ -3,6 +3,12 @@ FROM php:8.2-apache
 # Enable Apache rewrite rules
 RUN a2enmod rewrite
 
+# Install system CA certificates for secure MySQL/Aiven connections
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates \
+    && update-ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy the application into Apache's web root
 COPY . /var/www/html/
 
