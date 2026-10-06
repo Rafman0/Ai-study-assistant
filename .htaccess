@@ -1,0 +1,4 @@
+# Per-directory PHP upload limits (mirrors php.ini)
+# Applies immediately without an Apache restart.
+php_value upload_max_filesize 16M
+php_value post_max_size 16M
