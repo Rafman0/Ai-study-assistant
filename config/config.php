@@ -174,7 +174,7 @@ function get_db_connection() {
 
     try {
 
-        $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+        $dsn = "mysql:host=" . DB_HOST . ";port=21806;dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
 
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
