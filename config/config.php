@@ -183,7 +183,7 @@ function get_db_connection() {
         ];
 
         // Enable SSL for Aiven MySQL
-        $caBundle = getenv('CA_BUNDLE_PATH') ?: '/etc/ssl/certs/ca-certificates.crt';
+        $caBundle = getenv('CA_BUNDLE_PATH') ?: APP_PATH . '/certs/aiven-ca.pem';
 
         if (file_exists($caBundle)) {
             $options[PDO::MYSQL_ATTR_SSL_CA] = $caBundle;
