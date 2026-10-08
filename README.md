@@ -155,37 +155,7 @@ AI study assistant/
 - MySQL 8.0 or higher
 - AppServ (or similar PHP development environment)
 
-### Setup Instructions
 
-1. **Copy the project to your web directory:**
-   ```
-   C:\AppServ\www\AI study assistant\
-   ```
-
-2. **Create the database:**
-   - Run `database/schema.sql` in MySQL to create the database structure
-   - Run `database/seed.sql` to populate with sample data
-
-3. **Configure the application:**
-   - Edit `config/config.php` to set your database credentials
-   - Configure AI API keys if you want real AI responses
-
-4. **Access the application:**
-   ```
-   http://localhost/AI%20study%20assistant/
-   ```
-
-### Default Users
-
-**Admin:**
-- Email: admin@studyassistant.com
-- Password: admin123
-
-**Test Users:**
-- Email: john@example.com
-- Password: password
-- Email: jane@example.com
-- Password: password
 
 ## 🔐 Security Features
 
@@ -234,44 +204,7 @@ A comprehensive testing checklist is available in `TESTING_CHECKLIST.md` coverin
 - Responsive design
 - Path/routing verification
 
-## 📝 Configuration
 
-### Database Configuration (config/config.php)
-```php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'ai_study_assistant');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-```
-
-### AI API Configuration (config/config.php)
-```php
-define('AI_API_KEY', '');
-define('AI_API_URL', '');
-define('AI_MODEL', '');
-```
-
-The app ships in **demo mode** (empty AI constants): all AI features work offline
-using a built-in topic-detection engine, so the project is fully demonstrable
-without any API key.
-
-To switch to **real AI mode**, set an OpenAI-compatible chat-completions endpoint:
-
-```php
-// Example: OpenAI
-define('AI_API_KEY', 'sk-your-key-here');
-define('AI_API_URL', 'https://api.openai.com/v1/chat/completions');
-define('AI_MODEL', 'gpt-4o-mini');
-
-// Example: any OpenAI-compatible provider or local server (Ollama, LM Studio...)
-define('AI_API_KEY', 'ollama');                       // any non-empty string
-define('AI_API_URL', 'http://localhost:11434/v1/chat/completions');
-define('AI_MODEL', 'llama3.1');
-```
-
-Requirements for the endpoint:
-- Accepts `POST {model, messages: [{role, content}, ...]}`
-- Returns `{"choices": [{"message": {"content": "..."}}]}` with HTTP 200
 
 Once configured, every AI feature uses live responses automatically:
 - **AI Tutor** (`ai-tutor.php`) - graduated hint levels 1-4 via level-engineered prompts;
@@ -281,17 +214,6 @@ Once configured, every AI feature uses live responses automatically:
 - **Quiz Generator** (`quiz-center.php`) - generates multiple-choice questions
   as JSON; falls back to simulated questions if the response is unparseable
 
-## 🚀 Deployment Notes
-
-For production deployment:
-1. Update database credentials
-2. Configure AI API keys
-3. Set up proper error logging
-4. Configure email settings
-5. Enable HTTPS
-6. Set appropriate file permissions
-7. Configure production-timezone
-8. Review and update security settings
 
 ## 📄 License
 
