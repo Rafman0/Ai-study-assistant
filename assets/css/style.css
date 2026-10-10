@@ -2442,6 +2442,7 @@ button:focus,
 .admin-main {
     margin-left: 260px;
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -2476,6 +2477,8 @@ button:focus,
 .admin-content {
     padding: var(--spacing-xl);
     flex: 1;
+    min-width: 0;
+    overflow-x: auto;
 }
 
 .admin-sidebar-overlay {
@@ -2800,5 +2803,223 @@ button:focus,
     /* Prevent long unbroken labels/value rows from overflowing */
     .admin-table td {
         overflow-wrap: anywhere;
+    }
+}
+
+/* ============================================
+   Responsive overhaul: mobile/tablet top bar + compact density
+   - Phones AND tablets (< 992px) get a fixed top bar with a hamburger menu
+   - The sidebar becomes an off-canvas drawer on those sizes
+   - Dashboard is compacted ("zoomed out") on small screens
+   ============================================ */
+
+/* Top bar is part of every logged-in shell page; hidden on desktop */
+.app-topbar {
+    display: none;
+}
+
+.app-hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    border-radius: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.app-hamburger:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.app-topbar-logo {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.app-topbar-brand {
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+/* Phones + tablets: drawer navigation with a proper hamburger */
+@media (max-width: 991.98px) {
+    .app-topbar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 56px;
+        padding: 0 16px;
+        background: linear-gradient(180deg, #0F172A, #1E293B);
+        box-shadow: 0 2px 12px rgba(15, 23, 42, 0.25);
+        z-index: 2100;
+    }
+
+    /* Sidebar slides in below the top bar */
+    .modern-sidebar {
+        position: fixed;
+        left: -100%;
+        top: 56px;
+        width: min(280px, 85vw);
+        height: calc(100vh - 56px);
+        z-index: 2000;
+        transition: left 0.3s ease;
+    }
+
+    .modern-sidebar.show {
+        left: 0;
+    }
+
+    .sidebar-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(15, 23, 42, 0.5);
+        z-index: 1999;
+    }
+
+    .sidebar-backdrop.show {
+        display: block;
+    }
+
+    body.sidebar-open {
+        overflow: hidden;
+    }
+
+    .modern-main-content {
+        margin-left: 0;
+        padding-top: 72px; /* 56px top bar + breathing room */
+    }
+
+    /* The floating FAB is replaced by the hamburger in the top bar */
+    .mobile-menu-toggle,
+    .modern-mobile-toggle {
+        display: none !important;
+    }
+}
+
+/* Compact dashboard density on phones */
+@media (max-width: 767.98px) {
+    .modern-header {
+        margin-bottom: 20px;
+    }
+
+    .welcome-section h1 {
+        font-size: 20px;
+    }
+
+    .welcome-section p {
+        font-size: 14px;
+    }
+
+    .user-area {
+        gap: 12px;
+    }
+
+    .user-profile {
+        padding: 6px 12px;
+        gap: 10px;
+    }
+
+    .user-avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .user-info .user-name {
+        font-size: 13px;
+    }
+
+    .notification-icon {
+        font-size: 20px;
+        padding: 6px;
+    }
+
+    .stats-grid {
+        gap: 14px;
+        margin-bottom: 24px;
+    }
+
+    .stat-card {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .stat-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+
+    /* Must match the specificity of the base ".stat-card .stat-value" rule,
+       otherwise the 30px desktop size wins on phones too and the dashboard looks zoomed-in */
+    .stat-card .stat-value {
+        font-size: 20px;
+    }
+
+    .dashboard-grid {
+        gap: 16px;
+    }
+
+    .dashboard-card {
+        padding: 18px;
+    }
+
+    .card-header {
+        margin-bottom: 14px;
+    }
+
+    .card-header h3 {
+        font-size: 16px;
+    }
+
+    .session-course {
+        font-size: 18px;
+    }
+
+    .progress-stat .stat-value {
+        font-size: 20px;
+    }
+
+    .chart-container {
+        height: 160px;
+    }
+
+    .recommended-grid {
+        gap: 12px;
+    }
+
+    .recommended-card {
+        padding: 12px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 575.98px) {
+    .app-topbar {
+        padding: 0 12px;
+    }
+
+    .modern-main-content {
+        padding-bottom: 12px;
+    }
+
+    .user-role {
+        display: none;
     }
 }

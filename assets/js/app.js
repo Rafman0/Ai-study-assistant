@@ -21,15 +21,12 @@ function initNavbar() {
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarCollapse = document.querySelector('.navbar-collapse');
     
-    if (navbarToggler && navbarCollapse) {
-        navbarToggler.addEventListener('click', function() {
-            navbarCollapse.classList.toggle('show');
-        });
-    }
-    
+    // Note: Bootstrap's collapse data-api already toggles the mobile menu on
+    // .navbar-toggler click; do not bind a second click handler (it leaves the menu stuck open).
+
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+        if (navbarCollapse && navbarToggler && navbarCollapse.classList.contains('show')) {
             if (!navbarToggler.contains(e.target) && !navbarCollapse.contains(e.target)) {
                 navbarCollapse.classList.remove('show');
             }

@@ -16,7 +16,7 @@ require_once __DIR__ . '/../../config/config.php';
     <link href="<?php echo asset_url('vendor/bootstrap.min.css'); ?>" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo asset_url('css/style.css?v=3'); ?>">
+    <link rel="stylesheet" href="<?php echo asset_url('css/style.css?v=5'); ?>">
     
     <?php if (isset($extra_css)): ?>
         <?php echo $extra_css; ?>
@@ -24,6 +24,13 @@ require_once __DIR__ . '/../../config/config.php';
 </head>
 <body>
     <?php if (!empty($layout_app_shell)): ?>
+    <!-- Mobile top bar with hamburger menu (visible only on small screens) -->
+    <div class="app-topbar">
+        <button class="app-hamburger" type="button" onclick="toggleMobileSidebar()" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+        <img src="<?php echo asset_url('images/ai-study-logo.png'); ?>" alt="" class="app-topbar-logo">
+        <span class="app-topbar-brand"><?php echo APP_NAME; ?></span>
+    </div>
+
     <!-- App shell: single full-height sidebar + main content column -->
     <div class="modern-dashboard">
         <aside class="modern-sidebar">
@@ -101,4 +108,12 @@ require_once __DIR__ . '/../../config/config.php';
     <main>
     <?php else: ?>
     <!-- Shell-only layout: page renders its own full-height app shell (e.g. dashboard sidebar + content) -->
+    <?php if (is_logged_in() && !is_admin_logged_in()): ?>
+    <!-- Mobile top bar with hamburger menu (visible only on small screens) -->
+    <div class="app-topbar">
+        <button class="app-hamburger" type="button" onclick="toggleMobileSidebar()" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+        <img src="<?php echo asset_url('images/ai-study-logo.png'); ?>" alt="" class="app-topbar-logo">
+        <span class="app-topbar-brand"><?php echo APP_NAME; ?></span>
+    </div>
+    <?php endif; ?>
     <?php endif; ?>

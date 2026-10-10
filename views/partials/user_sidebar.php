@@ -72,7 +72,7 @@ $menu_items = [
     // Close the drawer on mobile once a navigation link is chosen
     document.addEventListener('click', function (e) {
         var link = e.target.closest ? e.target.closest('.sidebar-link') : null;
-        if (link && window.innerWidth <= 768) {
+        if (link && window.innerWidth <= 992) {
             var sidebar = document.querySelector('.modern-sidebar');
             if (sidebar) { sidebar.classList.remove('show'); }
             if (backdrop) { backdrop.classList.remove('show'); }
