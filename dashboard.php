@@ -80,6 +80,18 @@ if ($db) {
         $dashboard_data['announcements']->execute();
         $dashboard_data['announcements'] = $dashboard_data['announcements']->fetchAll();
 
+        // Unread notifications (published announcements newer than last seen)
+        $unread_notifications = 0;
+        $last_seen = $_SESSION['notifications_seen_at'] ?? null;
+        if ($last_seen) {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM announcements WHERE status='published' AND (publish_at IS NULL OR publish_at <= NOW()) AND audience='all' AND created_at > ?");
+            $stmt->execute([$last_seen]);
+        } else {
+            $stmt = $db->prepare("SELECT COUNT(*) FROM announcements WHERE status='published' AND (publish_at IS NULL OR publish_at <= NOW()) AND audience='all'");
+            $stmt->execute();
+        }
+        $unread_notifications = (int)$stmt->fetchColumn();
+
     } catch (PDOException $e) {
         error_log("Dashboard data error: " . $e->getMessage());
     }
@@ -106,7 +118,12 @@ require_once __DIR__ . '/views/partials/navbar.php';
                 <p>Let's continue your learning journey.</p>
             </div>
             <div class="user-area">
-                <div class="notification-icon">🔔</div>
+                <a href="<?php echo app_url('notifications.php'); ?>" class="notification-icon" title="Notifications" aria-label="Notifications">
+                    🔔
+                    <?php if (!empty($unread_notifications)): ?>
+                    <span class="notification-badge"><?php echo $unread_notifications > 9 ? '9+' : $unread_notifications; ?></span>
+                    <?php endif; ?>
+                </a>
                 <div class="user-profile">
                     <div class="user-avatar">
                         <?php echo strtoupper(substr($_SESSION['user_name'] ?? 'U', 0, 1)); ?>

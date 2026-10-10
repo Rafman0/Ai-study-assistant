@@ -1045,7 +1045,6 @@ button:focus,
 /* ===== MODERN DASHBOARD ===== */
 .modern-dashboard {
     display: flex;
-    min-height: 100vh;
     background-color: #F8FAFC;
 }
 
@@ -1073,7 +1072,7 @@ button:focus,
     background: linear-gradient(180deg, #0F172A, #1E293B);
     color: white;
     padding: 20px 16px;
-    height: 100vh;
+    max-height: 100vh;
     position: sticky;
     top: 0;
     display: flex;
@@ -1214,6 +1213,7 @@ button:focus,
 }
 
 .notification-icon {
+    position: relative;
     font-size: 24px;
     cursor: pointer;
     padding: 8px;
@@ -1221,10 +1221,36 @@ button:focus,
     background-color: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    line-height: 1;
 }
 
 .notification-icon:hover {
     transform: scale(1.1);
+    text-decoration: none;
+    color: inherit;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 10px;
+    background-color: #EF4444;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    box-shadow: 0 0 0 2px #FFFFFF;
+    box-sizing: border-box;
 }
 
 .user-profile {
@@ -1558,6 +1584,23 @@ button:focus,
     text-align: center;
     padding: 16px 0;
     margin: 0;
+}
+
+.activity-sub {
+    font-size: 13px;
+    color: #475569;
+    margin-top: 2px;
+    overflow-wrap: break-word;
+}
+
+.notification-unread-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #EF4444;
+    margin-left: 8px;
+    vertical-align: middle;
 }
 
 /* Responsive Design */

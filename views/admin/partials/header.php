@@ -18,7 +18,7 @@ $admin_name = $_SESSION['admin_name'] ?? $_SESSION['user_name'] ?? 'Admin';
     <link rel="icon" type="image/png" href="<?php echo asset_url('images/favicon.png'); ?>">
     <link href="<?php echo asset_url('vendor/bootstrap.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo asset_url('vendor/bootstrap-icons.min.css'); ?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo asset_url('css/style.css?v=5'); ?>">
+    <link rel="stylesheet" href="<?php echo asset_url('css/style.css?v=6'); ?>">
     <?php if (!empty($extra_css)) echo $extra_css; ?>
 </head>
 <body class="admin-body">

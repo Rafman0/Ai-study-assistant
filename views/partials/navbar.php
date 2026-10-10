@@ -16,7 +16,7 @@ require_once __DIR__ . '/../../config/config.php';
     <link href="<?php echo asset_url('vendor/bootstrap.min.css'); ?>" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo asset_url('css/style.css?v=5'); ?>">
+    <link rel="stylesheet" href="<?php echo asset_url('css/style.css?v=6'); ?>">
     
     <?php if (isset($extra_css)): ?>
         <?php echo $extra_css; ?>

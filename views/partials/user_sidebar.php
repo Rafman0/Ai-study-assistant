@@ -2,6 +2,7 @@
 $active_page = $active_page ?? 'dashboard';
 $menu_items = [
     'dashboard' => ['📊', 'Dashboard', 'dashboard.php'],
+    'notifications' => ['🔔', 'Notifications', 'notifications.php'],
     'ai-tutor' => ['🤖', 'AI Tutor', 'ai-tutor.php'],
     'course-summarizer' => ['📚', 'Course Summarizer', 'course-summarizer.php'],
     'courses' => ['📚', 'Manage Courses', 'courses.php'],
